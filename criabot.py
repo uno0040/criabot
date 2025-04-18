@@ -5,6 +5,9 @@ import os
 from datetime import datetime, timedelta
 import pytz
 import time
+from dotenv import load_dotenv, dotenv_values 
+
+load_dotenv() 
 
 intents = discord.Intents(messages=True, guilds=True)
 intents.message_content = True
@@ -226,6 +229,7 @@ async def caraba(ctx, *, message=None):
   else:
     # se sim:
     await ctx.send("O homem será taxado.")
-client.run()
+print(os.getenv('BOT_KEY'))
+client.run(os.getenv('BOT_KEY'))
 
 
