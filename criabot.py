@@ -229,7 +229,6 @@ async def caraba(ctx, *, message=None):
   else:
     # se sim:
     await ctx.send("O homem será taxado.")
-print(os.getenv('BOT_KEY'))
 client.run(os.getenv('BOT_KEY'))
 
 
