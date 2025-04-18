@@ -40,7 +40,7 @@ def tempo_ate_sexta():
     # adiciona os dias restante para obter a data da próxima sexta
     # funciona caso a sexta seja do mes que vem
     proxima_sexta = agora + timedelta(days=dias_ate_sexta)
-    meia_noite_prox_sexta = datetime(proxima_sexta.year, proxima_sexta.month, proxima_sexta.day, 15, 0, 0)
+    meia_noite_prox_sexta = datetime(proxima_sexta.year, proxima_sexta.month, proxima_sexta.day, 7, 0, 0)
     # 15hrs UTC == 12hrs GMT-3
     agora = agora.replace(tzinfo=None)
     # problema: quando é sexta feira e ja passou da hora, as 15hrs UTC, se a função for chamada novamente ela vai passar um tempo negativo, resultando em um alarme instantaneo.
@@ -48,7 +48,7 @@ def tempo_ate_sexta():
 
     if dias_ate_sexta == 0 and (meia_noite_prox_sexta - agora).total_seconds() < 0:
       proxima_sexta = agora + timedelta(days=7)
-      meia_noite_prox_sexta = datetime(proxima_sexta.year, proxima_sexta.month, proxima_sexta.day, 15, 0, 0)
+      meia_noite_prox_sexta = datetime(proxima_sexta.year, proxima_sexta.month, proxima_sexta.day, 7, 0, 0)
 
     tempo_restante = meia_noite_prox_sexta - agora
     tempo_segundos = tempo_restante.total_seconds()
@@ -85,7 +85,7 @@ async def tarefa_timer(ctx, tempo_segundos):
   # todo: terminar
   #segundos = tempo_segundos % 60
   print('Em {dias} dias, {horas} horas, {minutos} minutos e {segundos} segundos.'.format(dias=int(dias), horas=int_horas, minutos=int_minutos, segundos=segundos))
-  await ctx.send("Cobrando o caraba em " + str(tempo_segundos) + " segundos.")
+  await ctx.send("Cobrando o caraba em {tempo_segundos} segundos.\nOu {dias} dias, {horas} horas, {minutos} minutos e {segundos} segundos para os seres humanos.".format(tempo_segundos=str(tempo_segundos), dias=int(dias), horas=int_horas, minutos=int_minutos, segundos=segundos))
   await asyncio.sleep(tempo_segundos)
   # depois que o timer acabar tudo abaixo da linha acima sera executado
   await ctx.send("Chegou a hora.")
