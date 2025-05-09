@@ -14,8 +14,6 @@ intents.message_content = True
 #client = discord.Client(intents=intents)
 client = commands.Bot(command_prefix= "!", intents=intents)
 
-#TODO: IMPLEMENTAR TEMPO ATE A PROXIMA SEXTA FEIRA E COBRAR O CARABA DE UMA VEZ >:)
-
 video = "https://cdn.discordapp.com/attachments/404377042012995585/1203877295429783632/sexta_dos_crias.mp4?ex=65d2b11a&is=65c03c1a&hm=1fc268a6279b3cde9a39bd4d14ce983fc5788f079e2ec51a5831f6dc1583daac&"
 
 # tempo de inicio do timer atual caso usuários tentem começar outros timers
@@ -61,7 +59,7 @@ async def cobrar_caraba():
   # id do caraba: 257639764818264065
   # meu id : 257581347114057748
 
-  caraba = await client.fetch_user(257581347114057748)
+  caraba = await client.fetch_user(257639764818264065)
   print("Hoje é sexta, cobrando o senhor CarabaloneGraphics ™")
   await caraba.send("Caraba, chegou a hora. MANDE O VIDEO SENHOR CARABALONE GRAPHICS ™")
   await caraba.send(video)
@@ -174,45 +172,6 @@ async def sextou(ctx, *, message=None):
     await ctx.send("O comédia, hoje não é sexta não criança.")
     await caraba.send(mensagem)    
 
-# comando obsoleto.
-
-#@client.command()
-#async def timer(ctx, tempo_segundos, *, message=None):
-#  global timer_flag
-#  global tempo_inicio_timer_atual
-#  global tempo_final_timer_atual
-#  global debug_tempo_inicio_timer_atual
-#  global debug_tempo_final_timer_atual
-#
-#  print("-- Timer --")
-#  print("Estado atual da timer_flag:", timer_flag)
-#
-#  try:
-#    if timer_flag == False:
-#      debug_agora = datetime.now(pytz.timezone('GMT0'))
-#      debug_final = debug_agora + timedelta(seconds=tempo_ate_sexta())
-#      agora = datetime.now(pytz.timezone('America/Sao_Paulo'))
-#      final_timer = agora + timedelta(seconds=tempo_ate_sexta())
-#      #todo: implementar a mostragem do horario de inicio e fim do timer que esteja sob execucao
-#      tempo_inicio_timer_atual = agora.strftime("%d-%m-%Y, %H:%M:%S")
-#      tempo_final_timer_atual = final_timer.strftime("%d-%m-%Y, %H:%M:%S")
-#
-#      debug_tempo_inicio_timer_atual = debug_agora.strftime("%d-%m-%Y, %H:%M:%S")
-#      debug_tempo_final_timer_atual = debug_final.strftime("%d-%m-%Y, %H:%M:%S")
-#
-#      timer_flag = True
-#      tempo_em_segundos = int(tempo_segundos)
-#      # Iniciar o timer em segundo plano
-#      asyncio.create_task(tarefa_timer(ctx, tempo_em_segundos))
-#    else:
-#      
-#      print("Inicio UTC: " + debug_tempo_inicio_timer_atual)
-#      print("Final UTC: " + debug_tempo_final_timer_atual)
-#      await ctx.send("Já tem um timer em execução!\nInicio: " + tempo_inicio_timer_atual + "\nFinal: " + tempo_final_timer_atual)
-#  except ValueError:
-#    await ctx.send(f'O tempo deve ser um número inteiro.')
-
-
 @client.command()
 async def caraba(ctx, *, message=None):
   global caraba_flag
@@ -230,5 +189,3 @@ async def caraba(ctx, *, message=None):
     # se sim:
     await ctx.send("O homem será taxado.")
 client.run(os.getenv('BOT_KEY'))
-
-
