@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 import pytz
 import time
 from dotenv import load_dotenv, dotenv_values 
+import random
 
 load_dotenv() 
 
@@ -15,6 +16,7 @@ intents.message_content = True
 client = commands.Bot(command_prefix= "!", intents=intents)
 
 video = "https://cdn.discordapp.com/attachments/404377042012995585/1203877295429783632/sexta_dos_crias.mp4?ex=65d2b11a&is=65c03c1a&hm=1fc268a6279b3cde9a39bd4d14ce983fc5788f079e2ec51a5831f6dc1583daac&"
+gif_lilly = "https://tenor.com/view/lilly-satou-katawa-shoujo-gif-23469974"
 
 # tempo de inicio do timer atual caso usuários tentem começar outros timers
 # no caso de um timer já estiver ativo
@@ -135,7 +137,7 @@ async def cria(ctx):
 async def cria_cobra(ctx, user:discord.Member, *, message=None):
   message = "Você foi avisado."
   print("cobrando o senhor:",user.name)
-  #print("id do homem:", user.id)
+  print("id do homem:", user.id)
   taxa = "Cobrado."
   await ctx.send(taxa)
   await user.send(message)
@@ -143,6 +145,7 @@ async def cria_cobra(ctx, user:discord.Member, *, message=None):
 
 # id do caraba: 257639764818264065
 # meu id : 257581347114057748
+# id do nicholas: 275807354623229952
 @client.command()
 async def sextou(ctx, *, message=None):
   print("comando caraba acionado, checando para ver se hoje é sexta...")
@@ -188,4 +191,31 @@ async def caraba(ctx, *, message=None):
   else:
     # se sim:
     await ctx.send("O homem será taxado.")
+
+@client.command()
+async def nicholas(ctx, *, message=None):
+  usuario = await client.fetch_user(275807354623229952) # bongolas
+  # usuario = await client.fetch_user(257581347114057748) # eu
+
+  mensagens = [
+    "Tá fugindo da Lilly, Nicholas? Ela pode não ver o caminho, mas vê quem foge!",
+    "A Lilly tá lá esperando, Nicholas… ou você vai deixar ela plantada no chá pra sempre?",
+    "Você parou no meio, Nicholas… e a Lilly só queria que você segurasse a mão dela até o fim.",
+    "Lilly confiou na sua palavra, Nicholas… pena que você confiou no botão de sair.",
+    "A Lilly pode ser cega, mas ela viu que você largou ela na metade.",
+    "Tem gente que atravessa oceanos pelo amor… e tem o Nicholas, que não atravessa nem o save file.",
+    "E aí, Nicholas, a bengala da Lilly é pra se guiar… ou pra bater em quem não termina a rota dela?",
+    "Enquanto você pensa, Nicholas, a Lilly tá lá, servindo chá… sozinha.",
+    "A rota da Lilly não termina sozinha, Nicholas… só seu comprometimento que terminou.",
+    "Nicholas, a Lilly já perdoou muita coisa… mas abandonar ela na metade é imperdoável.",
+    "E a Lilly, hein Nicholas? Ela pode ser cega, mas ela vê seus vacilos."
+  ]
+
+  msg_enviada = mensagens[random.randint(0,10)]
+  print(msg_enviada)
+  print("Bingolando o Bingolas")
+  await ctx.send("Ele será bingolado.")
+  await usuario.send(msg_enviada)
+  await usuario.send(gif_lilly)
+
 client.run(os.getenv('BOT_KEY'))
